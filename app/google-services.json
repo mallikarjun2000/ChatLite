@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "375664739763",
+    "firebase_url": "https://chatlite-6b2d3.firebaseio.com",
+    "project_id": "chatlite-6b2d3",
+    "storage_bucket": "chatlite-6b2d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375664739763:android:96fc08949e8b29fb",
+        "android_client_info": {
+          "package_name": "com.example.chatlite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375664739763-7aan1sasiedbp7qqloti7o86fjab32qa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chatlite",
+            "certificate_hash": "c92b610efd83311d055e0ead1ae04783bee97744"
+          }
+        },
+        {
+          "client_id": "375664739763-bionq7g0dtb7r4407ngq8iqd5q2fkqbd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDA3EVfv1OH13AmH1qJWKFL0PPeaFUGl9s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375664739763-bionq7g0dtb7r4407ngq8iqd5q2fkqbd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
