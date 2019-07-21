@@ -15,8 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AllUsersActivity"
-            android:parentActivityName=".HomeActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
+        <activity
+            android:name=".AllUsersActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity android:name=".StatusActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".HomeActivity" />

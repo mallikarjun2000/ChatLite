@@ -1,5 +1,6 @@
 package com.example.chatlite;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -58,7 +59,6 @@ public class AllUsersActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
     }
 
     @Override
@@ -83,6 +83,17 @@ public class AllUsersActivity extends AppCompatActivity {
             protected void onBindViewHolder(MyViewHolder usersViewHolder, int i,User users) {
                 usersViewHolder.setName(users.getName());
                 usersViewHolder.setStatus(users.getStatus());
+
+                final String user_id = getRef(i).getKey();
+
+                usersViewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(AllUsersActivity.this,ProfileActivity.class);
+                        i.putExtra("user_id",user_id);
+                        startActivity(i);
+                    }
+                });
             }
         };
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
