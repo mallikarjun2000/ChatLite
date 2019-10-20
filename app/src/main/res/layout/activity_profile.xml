@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/friendrequest"
-        android:text="SENT REQUEST"
+        android:text="SEND REQUEST"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
