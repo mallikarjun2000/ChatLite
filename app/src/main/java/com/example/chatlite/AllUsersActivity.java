@@ -85,7 +85,7 @@ public class AllUsersActivity extends AppCompatActivity {
                 usersViewHolder.setName(users.getName());
                 usersViewHolder.setStatus(users.getStatus());
                 final String uid = getRef(i).getKey();
-                usersViewHolder.mView.setOnClickListener(new View.OnClickListener() {
+            usersViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent i = new Intent(AllUsersActivity.this,ProfileActivity.class);
