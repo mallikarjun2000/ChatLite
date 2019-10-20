@@ -120,8 +120,7 @@ public class SettingsActivity extends AppCompatActivity {
             ///    .start(this);
 
             CropImage.activity(imageUri).setCropShape(CropImageView.CropShape.OVAL)
-                    .setAspectRatio(1, 1)
-                    .start(this);
+                    .setAspectRatio(1, 1).start(this);
         }
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
@@ -140,17 +139,10 @@ public class SettingsActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if (task.isSuccessful())
                         {
-
-
-
-
                             Task<Uri> urlTask = task.getResult().getStorage().getDownloadUrl();
                             while (!urlTask.isSuccessful());
                             Uri downloadUrl = urlTask.getResult();
                             final String sdownload_url = String.valueOf(downloadUrl);
-
-
-
 
                             //String image_url = task.getResult().getUploadSessionUri().toString();
 

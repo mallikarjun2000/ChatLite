@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.chatlite"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -50,8 +50,6 @@ dependencies {
 
     //silly compressot updated 13/06/19
     implementation 'com.iceteck.silicompressorr:silicompressor:2.2.1'
-
-
 
 
 }
