@@ -119,13 +119,13 @@ public class SettingsActivity extends AppCompatActivity {
         if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
             Uri imageUri = data.getData();
 
+            Toast.makeText(SettingsActivity.this,"id =  "+imageUri,Toast.LENGTH_SHORT).show();
+
             CropImage.activity(imageUri).setAspectRatio(1, 1).start(this);
         }
 
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){//CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-
-            Toast.makeText(SettingsActivity.this,"id =  "+result,Toast.LENGTH_SHORT).show();
 
             if (resultCode == RESULT_OK) {
 
@@ -160,10 +160,6 @@ public class SettingsActivity extends AppCompatActivity {
                                 }
                             });
                         }
-                        else
-                        {
-                            Toast.makeText(SettingsActivity.this,"Fatal Error!",Toast.LENGTH_LONG).show();
-                        }
                             //Toast.makeText(SettingsActivity.this, "Image Updated", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -171,11 +167,6 @@ public class SettingsActivity extends AppCompatActivity {
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
-        }
-        else
-        {
-            Toast.makeText(SettingsActivity.this,"request code!=CropImage.cropImageACtivity_RESULT",Toast.LENGTH_LONG).show();
-
         }
     }
 }
