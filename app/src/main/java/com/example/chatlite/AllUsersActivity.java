@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -84,6 +86,7 @@ public class AllUsersActivity extends AppCompatActivity {
             protected void onBindViewHolder(MyViewHolder usersViewHolder, int i,User users) {
                 usersViewHolder.setName(users.getName());
                 usersViewHolder.setStatus(users.getStatus());
+                usersViewHolder.setImage(users.getImage());
                 final String uid = getRef(i).getKey();
             usersViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -122,6 +125,15 @@ public class AllUsersActivity extends AppCompatActivity {
         public void setStatus(String status){
             TextView userStatus = mView.findViewById(R.id.single_user_status);
             userStatus.setText(status);
+        }
+        public void setImage(String image){
+            ImageView imageView = mView.findViewById(R.id.single_image);
+            if(image.equals("default"))
+            {
+                Picasso.get().load(R.drawable.ic_launcher_background).into(imageView);
+            }
+            else
+            Picasso.get().load(image).into(imageView);
         }
     }
     }

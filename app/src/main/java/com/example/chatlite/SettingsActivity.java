@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,6 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+        databaseReference.keepSynced(true);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -117,14 +119,13 @@ public class SettingsActivity extends AppCompatActivity {
         if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
             Uri imageUri = data.getData();
 
-            ///    .start(this);
-
-            CropImage.activity(imageUri).setCropShape(CropImageView.CropShape.OVAL)
-                    .setAspectRatio(1, 1).start(this);
+            CropImage.activity(imageUri).setAspectRatio(1, 1).start(this);
         }
 
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){//CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
+
+            Toast.makeText(SettingsActivity.this,"id =  "+result,Toast.LENGTH_SHORT).show();
 
             if (resultCode == RESULT_OK) {
 
@@ -159,6 +160,10 @@ public class SettingsActivity extends AppCompatActivity {
                                 }
                             });
                         }
+                        else
+                        {
+                            Toast.makeText(SettingsActivity.this,"Fatal Error!",Toast.LENGTH_LONG).show();
+                        }
                             //Toast.makeText(SettingsActivity.this, "Image Updated", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -166,6 +171,11 @@ public class SettingsActivity extends AppCompatActivity {
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
+        }
+        else
+        {
+            Toast.makeText(SettingsActivity.this,"request code!=CropImage.cropImageACtivity_RESULT",Toast.LENGTH_LONG).show();
+
         }
     }
 }
