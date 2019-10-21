@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.text.DateFormat;
@@ -30,6 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
     private String user;
     private TextView nameView,statusView;
+    private ImageView imageView;
     private Button requestButton;
     private String current_state;
     @Override
@@ -39,6 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
         nameView = findViewById(R.id.pname);
         statusView = findViewById(R.id.pstatus);
         requestButton = findViewById(R.id.friendrequest);
+        imageView = findViewById(R.id.pimage);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         current_state = "not friends";
         final String uid = getIntent().getStringExtra("string_uid");
@@ -50,6 +54,12 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.child("name").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
+                String image = dataSnapshot.child("image").getValue().toString();
+                if(image.equals("default"))
+                {
+                    Picasso.get().load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdkaBEEeZk4IMpWUQsCqc7jXuX-4-qT7-V6fyF_79lCyanLr5OfA").into(imageView);
+                }else
+                    Picasso.get().load(image).into(imageView);
                 nameView.setText(name);
                 statusView.setText(status);
 
