@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -116,7 +118,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
+        /*if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
             Uri imageUri = data.getData();
 
             Toast.makeText(SettingsActivity.this,"id =  "+imageUri,Toast.LENGTH_SHORT).show();
@@ -167,6 +169,37 @@ public class SettingsActivity extends AppCompatActivity {
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
-        }
+        }*/
+
+        Uri file = data.getData();
+        //img.setImageURI(filePath);
+        //t1.setText(uri);
+        String uid = currentuser.getUid();
+        final StorageReference filepath = mStorageRef.child("profile_images").child(uid+".jpg");
+
+        UploadTask uploadTask = filepath.putFile(file);
+
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                //String link = String.valueOf(firebaseStorage.getDownloadUrl());
+                final String link = "";
+                filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String link = String.valueOf(uri);
+                        databaseReference.child("image").setValue(link);
+                    }
+                });
+                Toast.makeText(SettingsActivity.this, "Upload successful", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(SettingsActivity.this, "Upload Failed -> " + e, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 }
