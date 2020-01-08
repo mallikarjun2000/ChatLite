@@ -24,11 +24,12 @@ import com.squareup.picasso.Picasso;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private DatabaseReference mDatabaseReference,mDatabaseRequestReferance,mFriendsReference;
+    private DatabaseReference mDatabaseReference,mDatabaseRequestReferance,mFriendsReference ,mNotificationReference;
     private FirebaseUser currentUser;
     private String user;
     private TextView nameView,statusView;
@@ -49,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
         mDatabaseRequestReferance = FirebaseDatabase.getInstance().getReference().child("Request_Data");
         mFriendsReference = FirebaseDatabase.getInstance().getReference().child("Friends data");
+        mNotificationReference = FirebaseDatabase.getInstance().getReference().child("notifications");
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -140,9 +142,22 @@ public class ProfileActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(ProfileActivity.this,"Request Sent",Toast.LENGTH_SHORT).show();
-                                        current_state = "request sent";
-                                        requestButton.setEnabled(true);
-                                        requestButton.setText("cancel request");
+
+
+                                        HashMap<String , String > notification  = new HashMap<>();
+                                        notification.put("from",currentUser.getUid());
+                                        notification.put("type","request");
+
+                                        mNotificationReference.child(uid).push().setValue(notification).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                current_state = "request sent";
+                                                requestButton.setEnabled(true);
+                                                requestButton.setText("cancel request");
+                                            }
+                                        });
+
+
                                     }
                                 });
                             }

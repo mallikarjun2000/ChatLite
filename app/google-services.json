@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "375664739763-cl253b0505tudfqt8dap0nig5is0l8j6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chatlite",
+            "certificate_hash": "c6b36c531826cb432912310e4464cf7bc64b0f3e"
+          }
+        },
+        {
           "client_id": "375664739763-7aan1sasiedbp7qqloti7o86fjab32qa.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
