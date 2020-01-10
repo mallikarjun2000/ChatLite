@@ -118,7 +118,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        /*if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
+        if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
             Uri imageUri = data.getData();
 
             Toast.makeText(SettingsActivity.this,"id =  "+imageUri,Toast.LENGTH_SHORT).show();
@@ -169,15 +169,17 @@ public class SettingsActivity extends AppCompatActivity {
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
-        }*/
+        }
 
-        Uri file = data.getData();
+        /*Uri file = data.getData();
         //img.setImageURI(filePath);
         //t1.setText(uri);
         String uid = currentuser.getUid();
         final StorageReference filepath = mStorageRef.child("profile_images").child(uid+".jpg");
 
         UploadTask uploadTask = filepath.putFile(file);
+
+        Toast.makeText(SettingsActivity.this,""+file,Toast.LENGTH_SHORT).show();
 
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -188,6 +190,7 @@ public class SettingsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         String link = String.valueOf(uri);
+                        Toast.makeText(SettingsActivity.this,link,Toast.LENGTH_SHORT).show();
                         databaseReference.child("image").setValue(link);
                     }
                 });
@@ -198,7 +201,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(SettingsActivity.this, "Upload Failed -> " + e, Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
 
     }
